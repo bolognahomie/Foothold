@@ -9,9 +9,9 @@ public class EnemyHealth : MonoBehaviour
   int currentHitPoints = 0;
 
   // Start is called before the first frame update
-  void Start()
+  void OnEnable()
   {
-
+    currentHitPoints = maxHitPoints;
   }
 
   void OnParticleCollision(GameObject other)
@@ -21,8 +21,8 @@ public class EnemyHealth : MonoBehaviour
 
   void ProcessHit()
   {
-    currentHitPoints++;
-    if (currentHitPoints == maxHitPoints)
+    currentHitPoints--;
+    if (currentHitPoints <= 0)
     {
       // destroy enemy
       DestroyEnemy();
@@ -32,6 +32,6 @@ public class EnemyHealth : MonoBehaviour
   void DestroyEnemy()
   {
     GameObject vfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
-    Destroy(gameObject);
+    gameObject.SetActive(false);
   }
 }

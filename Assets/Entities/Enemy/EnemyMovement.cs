@@ -7,7 +7,7 @@ public class EnemyMovement : MonoBehaviour
   [SerializeField] List<Waypoint> path = new List<Waypoint>();
   [SerializeField] float movementSpeed = 1f;
 
-  void Start()
+  void OnEnable()
   {
     FindPath();
     ReturnToStart();
@@ -49,6 +49,6 @@ public class EnemyMovement : MonoBehaviour
       }
     }
 
-    Destroy(gameObject);
+    gameObject.SetActive(false);
   }
 }
