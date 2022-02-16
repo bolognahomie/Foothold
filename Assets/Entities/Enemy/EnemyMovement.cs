@@ -25,7 +25,6 @@ public class EnemyMovement : MonoBehaviour
       while (travelPercent < 1) // while the travel percent is less than 1, i.e. not yet at the end tile (Travel percent is the percent currently traveled between the start and end tiles, 0-1)
       {
         travelPercent += Time.deltaTime * movementSpeed; // update travelpercent with time.deltaTime multiplied by our movement speed
-        Debug.Log($"Travel Percent: {travelPercent} // time.DeltaTime: {Time.deltaTime}");
         transform.position = Vector3.Lerp(startPosition, endPosition, travelPercent); // moves entity towards next tile
         yield return new WaitForEndOfFrame(); // yeild back until the end of the current frame
       }
