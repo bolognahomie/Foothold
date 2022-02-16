@@ -5,8 +5,8 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
   [SerializeField] bool isPlaceable;
-
   [SerializeField] GameObject towerPrefab;
+  public bool IsPlaceable { get { return isPlaceable; } }
 
   void OnMouseOver()
   {

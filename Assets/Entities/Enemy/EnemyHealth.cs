@@ -21,14 +21,11 @@ public class EnemyHealth : MonoBehaviour
 
   void ProcessHit()
   {
-    if (currentHitPoints == maxHitPoints - 1)
+    currentHitPoints++;
+    if (currentHitPoints == maxHitPoints)
     {
       // destroy enemy
       DestroyEnemy();
-    }
-    else
-    {
-      currentHitPoints++;
     }
   }
 

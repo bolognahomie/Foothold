@@ -6,35 +6,66 @@ using TMPro;
 [ExecuteAlways]
 public class CoordinateLabeler : MonoBehaviour
 {
-    TextMeshPro label;
-    Vector2Int coordinates = new Vector2Int();
+  [SerializeField] Color defaultColor = new Color32(250, 191, 13, 255);
+  [SerializeField] Color blockedColor = Color.gray;
 
-    void Awake()
+
+  TextMeshPro label;
+  Vector2Int coordinates = new Vector2Int();
+  Waypoint waypoint;
+
+  void Awake()
+  {
+    label = GetComponent<TextMeshPro>();
+    label.enabled = false;
+
+    waypoint = GetComponentInParent<Waypoint>();
+    DisplayCoordinates();
+  }
+
+  void Update()
+  {
+    if (!Application.isPlaying)
     {
-        label = GetComponent<TextMeshPro>();
-        DisplayCoordinates();
+      // do something only if application is not playing
+      DisplayCoordinates();
+      UpdateObjectName();
     }
 
-    void Update()
-    {
-        if (!Application.isPlaying)
-        {
-            // do something only if application is not playing
-            DisplayCoordinates();
-            UpdateObjectName();
-        }
-    }
+    ColorCoordinates();
+    toggleLabels();
+  }
 
-    void DisplayCoordinates()
+  void toggleLabels()
+  {
+    if (Input.GetKeyDown(KeyCode.C))
     {
-        coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
-        coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
-
-        label.text = $"{coordinates.x}, {coordinates.y}";
+      label.enabled = !label.IsActive();
     }
+  }
 
-    void UpdateObjectName()
+  void ColorCoordinates()
+  {
+    if (waypoint.IsPlaceable)
     {
-        transform.parent.name = $"Tile {coordinates.ToString()}";
+      label.color = defaultColor;
     }
+    else
+    {
+      label.color = blockedColor;
+    }
+  }
+
+  void DisplayCoordinates()
+  {
+    coordinates.x = Mathf.RoundToInt(transform.parent.position.x / UnityEditor.EditorSnapSettings.move.x);
+    coordinates.y = Mathf.RoundToInt(transform.parent.position.z / UnityEditor.EditorSnapSettings.move.z);
+
+    label.text = $"{coordinates.x}, {coordinates.y}";
+  }
+
+  void UpdateObjectName()
+  {
+    transform.parent.name = $"Tile {coordinates.ToString()}";
+  }
 }
