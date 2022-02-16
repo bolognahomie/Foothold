@@ -6,7 +6,15 @@ public class EnemyHealth : MonoBehaviour
 {
   [SerializeField] int maxHitPoints = 5;
   [SerializeField] GameObject deathVFX;
+
+  Enemy enemy;
+
   int currentHitPoints = 0;
+
+  void Start()
+  {
+    enemy = GetComponent<Enemy>();
+  }
 
   // Start is called before the first frame update
   void OnEnable()
@@ -25,13 +33,14 @@ public class EnemyHealth : MonoBehaviour
     if (currentHitPoints <= 0)
     {
       // destroy enemy
-      DestroyEnemy();
+      KillEnemy();
     }
   }
 
-  void DestroyEnemy()
+  void KillEnemy()
   {
     GameObject vfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
     gameObject.SetActive(false);
+    enemy.RewardGold();
   }
 }
