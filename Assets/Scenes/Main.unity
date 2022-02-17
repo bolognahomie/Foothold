@@ -38512,6 +38512,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 989198676378454495, guid: a48fd13e01c6b4a43b5f94aed176910d, type: 3}
+      propertyPath: poolSize
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 989198676378454495, guid: a48fd13e01c6b4a43b5f94aed176910d, type: 3}
+      propertyPath: enemySpawnRate
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a48fd13e01c6b4a43b5f94aed176910d, type: 3}
 --- !u!1001 &3984568174800409096
