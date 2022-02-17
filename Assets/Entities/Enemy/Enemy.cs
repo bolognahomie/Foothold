@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
   [SerializeField] int goldReward = 25;
   [SerializeField] int goldPenalty = 25;
+  [SerializeField] GameObject depositTextPrefab;
+  [SerializeField] GameObject withdrawTextPrefab;
 
   Bank bank;
 
@@ -18,10 +20,12 @@ public class Enemy : MonoBehaviour
   {
     if (bank == null) { return; }
     bank.Deposit(goldReward);
+    GameObject tempDepositText = Instantiate(depositTextPrefab, transform.position, Quaternion.identity);
+    tempDepositText.transform.GetComponent<TextMesh>().text = $"+{goldReward}";
   }
   public void StealGold()
   {
     if (bank == null) { return; }
-    bank.Withdraw(goldReward);
+    bank.Withdraw(goldPenalty);
   }
 }

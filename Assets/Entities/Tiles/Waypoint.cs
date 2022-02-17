@@ -5,7 +5,7 @@ using UnityEngine;
 public class Waypoint : MonoBehaviour
 {
   [SerializeField] bool isPlaceable;
-  [SerializeField] GameObject towerPrefab;
+  [SerializeField] Tower towerPrefab;
   public bool IsPlaceable { get { return isPlaceable; } }
 
   void OnMouseOver()
@@ -26,28 +26,8 @@ public class Waypoint : MonoBehaviour
   {
     if (isPlaceable)
     {
-      Instantiate(towerPrefab, transform.position, Quaternion.identity);
-      isPlaceable = false;
+      bool isPlaced = towerPrefab.CreateTower(towerPrefab, transform.position);
+      isPlaceable = !isPlaced;
     }
   }
-
-  //   [SerializeField] float hoverPositionChange = 2f;
-
-  //   Vector3 positionChange = new Vector3(+0f, +.01f, +0f);
-  //   Vector3 originalPosition;
-  // originalPosition = transform.position;
-
-  // if (transform.position.y < hoverPositionChange)
-  // {
-  //   transform.position += positionChange;
-  // }
-
-  //   IEnumerator ReturnToOriginalPosition()
-  //   {
-  //     while (transform.position.y > originalPosition.y)
-  //     {
-  //       transform.position -= positionChange;
-  //       yield return new WaitForEndOfFrame();
-  //     }
-  //   }
 }

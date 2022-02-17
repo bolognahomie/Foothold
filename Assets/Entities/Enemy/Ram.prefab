@@ -169,3 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2d88de1567b9bb4783ab5c5059f5706, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goldReward: 25
+  goldPenalty: 25
+  depositTextPrefab: {fileID: 1397844478894317942, guid: 2ad43c14c3037d748b171afad6b6f8e3, type: 3}
+  withdrawTextPrefab: {fileID: 3455989555563926792, guid: 0124bd18ebd053c4e9980114df936bd1, type: 3}

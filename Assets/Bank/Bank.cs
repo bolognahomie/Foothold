@@ -1,26 +1,50 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Bank : MonoBehaviour
 {
-    [SerializeField] int startingBalance = 150;
+  [SerializeField] int startingBalance = 150;
+  [SerializeField] TextMeshProUGUI displayBalance;
+  [SerializeField] TextMeshProUGUI depositAmount;
+  [SerializeField] int currentBalance;
+  public int CurrentBalance { get { return currentBalance; } }
 
-    [SerializeField] int currentBalance;
+  void Awake()
+  {
+    currentBalance = startingBalance;
+    UpdateDisplay();
+  }
 
-    void Awake()
+  public void Deposit(int amount)
+  {
+    currentBalance += Mathf.Abs(amount);
+    // depositAmount.text = $"+{amount}";
+    // depositAmount.gameObject.SetActive(true);
+    UpdateDisplay();
+  }
+  public void Withdraw(int amount)
+  {
+    currentBalance -= Mathf.Abs(amount);
+    UpdateDisplay();
+
+    if (currentBalance < 0)
     {
-        currentBalance = startingBalance;
+      //lose game
+      ReloadScene();
     }
+  }
 
-    public int CurrentBalance { get { return currentBalance; } }
+  void ReloadScene()
+  {
+    Scene currentScene = SceneManager.GetActiveScene();
+    SceneManager.LoadScene(currentScene.buildIndex);
+  }
 
-    public void Deposit(int amount)
-    {
-        currentBalance += Mathf.Abs(amount);
-    }
-    public void Withdraw(int amount)
-    {
-        currentBalance -= Mathf.Abs(amount);
-    }
+  void UpdateDisplay()
+  {
+    displayBalance.text = currentBalance.ToString();
+  }
 }

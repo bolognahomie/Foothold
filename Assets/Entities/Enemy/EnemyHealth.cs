@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Enemy))]
+
 public class EnemyHealth : MonoBehaviour
 {
   [SerializeField] int maxHitPoints = 5;
+  [SerializeField] int difficultyRamp = 1;
   [SerializeField] GameObject deathVFX;
 
   Enemy enemy;
@@ -41,6 +44,7 @@ public class EnemyHealth : MonoBehaviour
   {
     GameObject vfx = Instantiate(deathVFX, transform.position, Quaternion.identity);
     gameObject.SetActive(false);
+    maxHitPoints += difficultyRamp;
     enemy.RewardGold();
   }
 }
